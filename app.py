@@ -1,4 +1,4 @@
-import os, sys, ping, time, rrd
+import os, sys, ping, time, rrd, signal
 
 host = "www.google.com"
 rrdfile = "temp/ping.rrd"
@@ -35,7 +35,7 @@ class HelloworldApp(QtGui.QMainWindow):
 		win.ui.graph.setPixmap(QtGui.QPixmap(os.getcwd() + "/" + rrdpng))
 	
 def exit():
-	sys.exit()
+	sys.exit(0)
 
 class AThread(QtCore.QThread):
 	def __init__(self):
@@ -67,7 +67,13 @@ class AThread(QtCore.QThread):
 		self.graph_width = int(width)
 		self.graph_height = int(height)
 
+
+def signal_handler(signal, frame):
+	sys.exit(0)
+
+
 if __name__ == "__main__":
+	signal.signal(signal.SIGINT, signal_handler)
 	
 	rrd.remove_png(rrdpng)
 	rrd.create_rrd(rrdfile)
