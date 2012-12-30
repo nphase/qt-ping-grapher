@@ -21,11 +21,10 @@ class HelloworldApp(QtGui.QMainWindow):
 		self.ui.ms_label.setText("Initializing...")
 		self.ui.setStyleSheet(self.styleData)
 		self.ui.show()
-		self.ui.showFullScreen()
+		# self.ui.showFullScreen() #seems to be troublesome for raspberry pis
 		
 		
-		thread.set_graph_width(int(self.ui.graph.size().width()))
-		thread.set_graph_height(int(self.ui.graph.size().height()))
+		thread.set_graph_size(self.ui.graph.size().width(), self.ui.graph.size().height())
 		
 		self.connect(thread, thread.signal, self.updateUI)
 		self.connect(self.ui.exitButton, QtCore.SIGNAL("clicked()"), exit)
@@ -53,7 +52,6 @@ class AThread(QtCore.QThread):
 			pingval = ping.ping(host)
 			rrd.update_rrd(rrdfile, pingval)
 			
-			# every 5 seconds
 			if (rrd_count == 5):
 				rrd.update_png(rrdpng, rrdfile, self.graph_width, self.graph_height)
 				rrd_count = 0
@@ -65,12 +63,8 @@ class AThread(QtCore.QThread):
 			time.sleep(1)
 			rrd_count += 1
 			
-	def set_graph_width(self, width):
-		print "setting graph width to " + str(width)
+	def set_graph_size(self, width, height):
 		self.graph_width = int(width)
-		
-	def set_graph_height(self, height):
-		print "setting graph height to " + str(height)
 		self.graph_height = int(height)
 
 if __name__ == "__main__":
