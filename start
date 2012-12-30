@@ -1,3 +1,4 @@
 #!/bin/bash
 export DISPLAY=:0.0
+xset s off # don't do this!
 python app.py
