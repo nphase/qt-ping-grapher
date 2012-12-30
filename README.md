@@ -13,6 +13,11 @@ Simple:
 
 ## FAQ
 
+#### What does it look like?
+Pretty bare:
+
+![Screenshot](https://raw.github.com/nphase/qt-ping-grapher/master/resources/screenshot.jpg)
+
 #### Help! My screen keeps going blank!
 I had luck after modifiying `/etc/lightdm/lightdm.conf` to: `xserver-command=X -s 0 -dpms` under `[SeatDefaults]`
 
@@ -27,3 +32,4 @@ Then you can't run qt-ping-grapher.
 
 #### Why did you build this?
 A convenient and useful excuse to play with QT and build something in python. It's been a while.
+
