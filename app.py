@@ -22,7 +22,7 @@ class HelloworldApp(QtGui.QMainWindow):
 		self.ui.ms_label.setText("Initializing...")
 		self.ui.setStyleSheet(self.styleData)
 		self.ui.show()
-		# self.ui.showFullScreen() #seems to be troublesome for raspberry pis
+		self.ui.showFullScreen() #seems to be troublesome for raspberry pis
 		
 		rrd_thread.set_graph_size(self.ui.graph.size().width(), self.ui.graph.size().height())
 		
